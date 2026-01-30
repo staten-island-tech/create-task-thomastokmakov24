@@ -1,10 +1,10 @@
 import './style.css'
 
-const gangGangDiv = document.getElementById('GangGang');
+const selectDiv = document.getElementById('select');
 
 function logToDiv(message) {
   console.log(message);
-  gangGangDiv.innerHTML += message + '<br>';
+  selectDiv.innerHTML += message + '<br>';
 }
 
 function getRandomInt(min, max) {
@@ -13,21 +13,21 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
   }
 
-const gay = getRandomInt(0, 10);
-logToDiv(gay);
+const rndm = getRandomInt(0, 10);
+//logToDiv(rndm, "beep beep, numbers go here ");
 let aespa = false;
 let attempts = [];
 
 function check(userInput) {
-  if (userInput === gay) {
+  if (userInput === rndm) {
     attempts.push(userInput);
     logToDiv(`You win! 🎉 It took you ${attempts.length} times to guess the number`);
     logToDiv('Your attempts: ' + attempts.join(', '));
     aespa = true;
-  }  else if (userInput <= gay) {
+  }  else if (userInput <= rndm) {
     attempts.push(userInput);
     logToDiv('Too low! 📉 Try again!');
-  } else if (userInput >= gay) {
+  } else if (userInput >= rndm) {
     attempts.push(userInput);
     logToDiv('Too high! 📈 Try again!');
   } else {
@@ -41,7 +41,7 @@ function check(userInput) {
     }, 0);
   }
 }
-
+//while aespa is false, keep asking for input fix over the weekend
 const userInput = parseInt(prompt('Guess a number between 0 and 10:'));
 check(userInput);
 /* while (aespa !== true) {
