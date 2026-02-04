@@ -2,15 +2,12 @@
 
 import './style.css';
 // const selectDiv = document.getElementById('select');
-const selectDiv = document.getElementById('select');
-// function logToDiv(message) {
-//   console.log(message);
-//   selectDiv.innerHTML += message + '<br>';
-// }
-
 function logToDiv(message) {
   console.log(message);
-  selectDiv.innerHTML += message + '<br>';
+  const selectDiv = document.getElementById('select');
+  if (selectDiv) {
+    selectDiv.innerHTML += message + '<br>';
+  }
 }
 function getRandomInt(min, max) {
   const minCeiled = Math.ceil(min);
@@ -21,7 +18,7 @@ function getRandomInt(min, max) {
 //   return Math.floor(Math.random() * (max - min) + min);
 // }// IM CHOOSING MINE OVER GPT'S
 const rndm = getRandomInt(0, 10);
-let aespa = false;
+//let aespa = false;
 let attempts = [];
 // const rndm = getRandomInt(0, 10);
 // //logToDiv(rndm, "beep beep, numbers go here ");
@@ -47,21 +44,36 @@ function check(userInput) {
     attempts.push(userInput);
     logToDiv(`You win! 🎉 It took you ${attempts.length} times to guess the number`);
     logToDiv('Your attempts: ' + attempts.join(', '));
-    aespa = true;
-  }  else if (userInput <= rndm) {
+    return true;
+  } else if (userInput < rndm) {
     attempts.push(userInput);
     logToDiv('Too low! 📉 Try again!');
-  } else if (userInput >= rndm) {
+  } else if (userInput > rndm) {
     attempts.push(userInput);
     logToDiv('Too high! 📈 Try again!');
   } else {
     logToDiv('Invalid input! ❌ Please enter a number between 0 and 10.');
   }
-
-while (!aespa) {
-  const userInput = prompt('Guess a number between 0 and 10:');
-  aespa = check(userInput);
+  return false;
 }
+/* let gameWon = false;
+while (!gameWon) {
+  const userInput = parseInt(prompt('Guess a number between 0 and 10:'));
+  gameWon = check(userInput);
+} */
+function ask() {
+  const raw = prompt('Guess a number between 0 and 10:');
+  // If user cancels prompt `raw` will be null. Parse with base 10 and handle NaN.
+  const userInput = raw === null ? NaN : parseInt(raw, 10);
+  const won = check(userInput);
+  if (!won) {
+    // allow browser to repaint DOM updates from logToDiv before showing the next prompt
+    setTimeout(ask, 0);
+  }
+}
+
+// Start the first prompt asynchronously so initial DOM mounts and styles can paint.
+setTimeout(ask, 0);
 //   //bs atarts here
 //   if (!aespa) {
 //     setTimeout(() => {
