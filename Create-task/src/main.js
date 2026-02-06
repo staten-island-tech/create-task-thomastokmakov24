@@ -1,110 +1,50 @@
-// import './style.css'
+import "./style.css";
 
-import './style.css';
-// const selectDiv = document.getElementById('select');
 function logToDiv(message) {
   console.log(message);
-  const selectDiv = document.getElementById('select');
+  const selectDiv = document.getElementById("select");
   if (selectDiv) {
-    selectDiv.innerHTML += message + '<br>';
+    selectDiv.innerHTML += message + "<br>";
   }
 }
 function getRandomInt(min, max) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
-  }
-// function getRandomInt(min, max) {
-//   return Math.floor(Math.random() * (max - min) + min);
-// }// IM CHOOSING MINE OVER GPT'S
+}
+
 const rndm = getRandomInt(0, 10);
-//let aespa = false;
+
 let attempts = [];
-// const rndm = getRandomInt(0, 10);
-// //logToDiv(rndm, "beep beep, numbers go here ");
-// let aespa = false;
-// let attempts = [];
-// function check(userInput) {
-//   attempts.push(userInput);
 
-//   if (userInput === rndm) {
-//     logToDiv(`You win! 🎉 It took you ${attempts.length} times to guess the number`);
-//     logToDiv('Your attempts: ' + attempts.join(', '));
-//     return true;
-//   } else if (userInput < rndm) {
-//     logToDiv('Too low! 📉 Try again!');
-//   } else {
-//     logToDiv('Too high! 📈 Try again!');
-//   }
-
-//   return false;
-// }
 function check(userInput) {
   if (userInput === rndm) {
     attempts.push(userInput);
-    logToDiv(`You win! 🎉 It took you ${attempts.length} times to guess the number`);
-    logToDiv('Your attempts: ' + attempts.join(', '));
+    logToDiv(
+      `You win! 🎉 It took you ${attempts.length} times to guess the number`,
+    );
+    logToDiv("Your attempts: " + attempts.join(", "));
     return true;
   } else if (userInput < rndm) {
     attempts.push(userInput);
-    logToDiv('Too low! 📉 Try again!');
+    logToDiv("Too low! 📉 Try again!");
   } else if (userInput > rndm) {
     attempts.push(userInput);
-    logToDiv('Too high! 📈 Try again!');
+    logToDiv("Too high! 📈 Try again!");
   } else {
-    logToDiv('Invalid input! ❌ Please enter a number between 0 and 10.');
+    logToDiv("Invalid input! ❌ Please enter a number between 0 and 10.");
   }
   return false;
 }
-/* let gameWon = false;
-while (!gameWon) {
-  const userInput = parseInt(prompt('Guess a number between 0 and 10:'));
-  gameWon = check(userInput);
-} */
+
 function ask() {
-  const raw = prompt('Guess a number between 0 and 10:');
-  // If user cancels prompt `raw` will be null. Parse with base 10 and handle NaN.
+  const raw = prompt("Guess a number between 0 and 10:");
+
   const userInput = raw === null ? NaN : parseInt(raw, 10);
   const won = check(userInput);
   if (!won) {
-    // allow browser to repaint DOM updates from logToDiv before showing the next prompt
     setTimeout(ask, 0);
   }
 }
 
-// Start the first prompt asynchronously so initial DOM mounts and styles can paint.
 setTimeout(ask, 0);
-//   //bs atarts here
-//   if (!aespa) {
-//     setTimeout(() => {
-//       const userInput = parseInt(prompt('Guess a number between 0 and 10:'));//try to understand this code. Parseint is like significant numbers. 0770 = 770 and decimals are tossed or truncated or some bs. prompt - ts needs to be studied .\_/.
-//       check(userInput);
-//     }, 0);
-//   }
-// }
-// //while aespa is false, keep asking for input fix over the weekend
-// const userInput = parseInt(prompt('Guess a number between 0 and 10:'));
-// check(userInput);
-// /* while (aespa !== true) {
-//   const userInput = parseInt(prompt('Guess a number between 0 and 10:'));//try to understand this code. Parseint is like significant numbers. 0770 = 770 and decimals are tossed or truncated or some bs. prompt - ts needs to be studied .\_/.
-//   check(userInput);
-// } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
