@@ -28,23 +28,26 @@ function check(userInput) {
   } else if (userInput < rndm) {
     attempts.push(userInput);
     logToDiv("Too low! 📉 Try again!");
+    alert("Too low! 📉 Try again!");
   } else if (userInput > rndm) {
     attempts.push(userInput);
     logToDiv("Too high! 📈 Try again!");
+    alert("Too high! 📈 Try again!");
   } else {
     logToDiv("Invalid input! ❌ Please enter a number between 0 and 10.");
+    alert("Invalid input! ❌ Please enter a number between 0 and 10.");
   }
   return false;
 }
 
 function ask() {
-  const raw = prompt("Guess a number between 0 and 10:");
+  let won = false;
 
-  const userInput = raw === null ? NaN : parseInt(raw, 10);
-  const won = check(userInput);
-  if (!won) {
-    setTimeout(ask, 0);
+  while (!won) {
+    const raw = prompt("Guess a number between 0 and 10:");
+    const userInput = raw === null ? NaN : parseInt(raw, 10);
+    won = check(userInput);
   }
 }
 
-setTimeout(ask, 0);
+ask();
